@@ -1,0 +1,25 @@
+<svg width="240" height="72" viewBox="0 0 240 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="mgPink" x1="8" y1="8" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fb7bb8"/>
+      <stop offset="0.55" stop-color="#ec4899"/>
+      <stop offset="1" stop-color="#db2777"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#be185d" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect x="8" y="8" width="56" height="56" rx="18" fill="url(#mgPink)" filter="url(#softShadow)"/>
+  <text x="36" y="38" text-anchor="middle" dominant-baseline="central"
+        font-family="Inter, Arial, sans-serif" font-size="18" font-weight="900" fill="white"
+        letter-spacing="-1">MG</text>
+
+  <path d="M36 47V41" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M31.5 44.2L36 48.7L40.5 44.2" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="78" y="32" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="900"
+        fill="#08111f" letter-spacing="-0.8">MgreSV</text>
+  <text x="78" y="50" font-family="Inter, Arial, sans-serif" font-size="10.5" font-weight="800"
+        fill="#64748b" letter-spacing="-0.15">Fast Media Downloader</text>
+</svg>

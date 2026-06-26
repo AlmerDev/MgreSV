@@ -1,0 +1,16 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="mgPink" x1="72" y1="72" x2="440" y2="440" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fb7bb8"/>
+      <stop offset="0.55" stop-color="#ec4899"/>
+      <stop offset="1" stop-color="#db2777"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="150" fill="#fdf2f8"/>
+  <rect x="72" y="72" width="368" height="368" rx="112" fill="url(#mgPink)"/>
+  <text x="256" y="237" text-anchor="middle" dominant-baseline="central"
+        font-family="Inter, Arial, sans-serif" font-size="132" font-weight="950" fill="white"
+        letter-spacing="-8">MG</text>
+  <path d="M256 330V280" stroke="white" stroke-width="24" stroke-linecap="round"/>
+  <path d="M214 306L256 348L298 306" stroke="white" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
