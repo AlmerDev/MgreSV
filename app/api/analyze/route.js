@@ -59,16 +59,21 @@ export async function POST(req) {
   }
 
   const hasPhotoSlides = slides.some((item) => item.type === "photo")
+  const hasOnlyPhotoSlides = slides.length > 0 && slides.every((item) => item.type === "photo")
   const hasManySlides = slides.length > 1
 
-  const allowedTabs = hasPhotoSlides
-    ? unique(["photo", ...profile.allowedTabs])
-    : profile.allowedTabs
+  const allowedTabs = hasOnlyPhotoSlides
+    ? ["photo"]
+    : hasPhotoSlides
+      ? unique(["photo", ...profile.allowedTabs])
+      : profile.allowedTabs
 
   const suggestedGroup = hasPhotoSlides ? "photo" : profile.suggestedGroup
   const note = hasManySlides
-    ? `Terdeteksi ${slides.length} media/slide. Kamu bisa download per slide atau download semua slide sekaligus.`
-    : profile.note
+    ? `Terdeteksi ${slides.length} foto/slide. File type otomatis sebagai foto, jadi daftar format tidak ditampilkan.`
+    : hasOnlyPhotoSlides
+      ? "Link ini terdeteksi sebagai foto. File type otomatis sebagai foto, jadi daftar format tidak ditampilkan."
+      : profile.note
 
   return NextResponse.json({
     ok: true,
