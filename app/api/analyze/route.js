@@ -96,7 +96,11 @@ async function inspectFromWorker(url) {
   const workerUrl = process.env.DOWNLOADER_WORKER_URL
   const workerToken = process.env.DOWNLOADER_WORKER_TOKEN
 
+  // Convert must stay responsive even if worker/Railway/Cobalt is slow or down.
   if (!workerUrl) return null
+
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 5500)
 
   try {
     const inspectUrl = makeWorkerEndpoint(workerUrl, "/api/inspect")
@@ -107,7 +111,8 @@ async function inspectFromWorker(url) {
         ...(workerToken ? { authorization: `Bearer ${workerToken}` } : {})
       },
       body: JSON.stringify({ url }),
-      cache: "no-store"
+      cache: "no-store",
+      signal: controller.signal
     })
 
     const data = await response.json().catch(() => null)
@@ -115,6 +120,8 @@ async function inspectFromWorker(url) {
     return data
   } catch {
     return null
+  } finally {
+    clearTimeout(timeout)
   }
 }
 

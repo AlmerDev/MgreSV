@@ -19,15 +19,21 @@ export async function POST(req) {
   }
 
   try {
-    const response = await fetch(workerUrl, {
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 120000)
+
+    const response = await fetch(makeWorkerEndpoint(workerUrl, "/api/download"), {
       method: "POST",
       headers: {
         "content-type": "application/json",
         ...(workerToken ? { authorization: `Bearer ${workerToken}` } : {})
       },
       body: JSON.stringify(payload),
-      cache: "no-store"
+      cache: "no-store",
+      signal: controller.signal
     })
+
+    clearTimeout(timeout)
 
     const data = await response.json().catch(() => null)
 
@@ -44,9 +50,15 @@ export async function POST(req) {
   } catch {
     return NextResponse.json({
       ok: false,
-      error: "Website tidak bisa menghubungi worker. Cek URL worker dan redeploy."
+      error: "Website tidak bisa menghubungi worker. Pastikan DOWNLOADER_WORKER_URL benar, worker Railway online, lalu redeploy Vercel."
     }, { status: 502 })
   }
+}
+
+function makeWorkerEndpoint(workerUrl, path) {
+  const clean = String(workerUrl || "").replace(/\/$/, "")
+  if (clean.endsWith("/api/download")) return clean.replace(/\/api\/download$/, path)
+  return clean + path
 }
 
 function isValidUrl(value) {
