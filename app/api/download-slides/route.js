@@ -2,8 +2,8 @@ import { NextResponse } from "next/server"
 
 export async function POST(req) {
   const payload = await req.json()
-  const workerUrl = process.env.DOWNLOADER_WORKER_URL
-  const workerToken = process.env.DOWNLOADER_WORKER_TOKEN
+  const workerUrl = cleanEnvValue(process.env.DOWNLOADER_WORKER_URL)
+  const workerToken = cleanEnvValue(process.env.DOWNLOADER_WORKER_TOKEN)
 
   if (!workerUrl) {
     return NextResponse.json({
@@ -48,4 +48,9 @@ function makeWorkerEndpoint(workerUrl, path) {
   const clean = String(workerUrl || "").replace(/\/$/, "")
   if (clean.endsWith("/api/download")) return clean.replace(/\/api\/download$/, path)
   return clean + path
+}
+
+
+function cleanEnvValue(value) {
+  return String(value || "").trim().replace(/^[\'"]|[\'"]$/g, "")
 }

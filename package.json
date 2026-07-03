@@ -1,6 +1,6 @@
 {
   "name": "menginasv-cobalt-ready-web",
-  "version": "5.10.0",
+  "version": "7.5.6-instagram-cookies-support",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,6 +11,8 @@
     "next": "14.2.5",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "lucide-react": "^0.468.0"
+    "lucide-react": "^0.468.0",
+    "@supabase/supabase-js": "^2.45.4",
+    "react-icons": "^5.3.0"
   }
 }

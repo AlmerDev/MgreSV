@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="506" viewBox="0 0 900 506">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset="1" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="506" rx="42" fill="url(#g)"/>
+  <circle cx="450" cy="205" r="64" fill="rgba(255,255,255,.22)"/>
+  <path d="M422 230l71-42v84l-71-42z" fill="white"/>
+  <text x="450" y="335" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="800" fill="white">TikTok Photo</text>
+  <text x="450" y="385" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="rgba(255,255,255,.85)">Preview fallback</text>
+</svg>
