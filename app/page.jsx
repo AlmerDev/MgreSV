@@ -375,7 +375,7 @@ export default function Home() {
       if (!res.ok || !data.ok) {
         setError(data.error || "Download slide gagal.");
       } else {
-        setLastFile(data);
+        setLastFile({ ...data, title: data.title || analysis?.title || "MgreSV download", thumbnail: data.thumbnail || primaryThumbnail || "" });
         await triggerDownload(
           data.downloadUrl,
           data.title || `slide-${index + 1}`,
@@ -421,7 +421,7 @@ export default function Home() {
       if (!res.ok || !data.ok) {
         setError(data.error || "Download semua slide gagal.");
       } else {
-        setLastFile(data);
+        setLastFile({ ...data, title: data.title || analysis?.title || "MgreSV download", thumbnail: data.thumbnail || primaryThumbnail || "" });
         await triggerDownload(
           data.downloadUrl,
           data.title || `${analysis?.platform || "slides"}-slides.zip`,
@@ -469,7 +469,7 @@ export default function Home() {
       if (!res.ok || !data.ok) {
         setError(data.error || "Download gagal.");
       } else {
-        setLastFile(data);
+        setLastFile({ ...data, title: data.title || analysis?.title || "MgreSV download", thumbnail: data.thumbnail || primaryThumbnail || "" });
         await triggerDownload(
           data.downloadUrl,
           data.title || `menginasv.${row.fileType}`,
@@ -690,12 +690,17 @@ export default function Home() {
 
             {lastFile ? (
               <div className="lastFile">
+                {lastFile.thumbnail ? (
+                  <div className="lastFileThumb">
+                    <img src={previewImageUrl(lastFile.thumbnail || primaryThumbnail, analysis?.source || url)} alt={lastFile.title || analysis?.title || "Preview file"} />
+                  </div>
+                ) : null}
                 <b>File siap.</b>
-                <span>{lastFile.title}</span>
+                <span>{lastFile.title || analysis?.title || "MgreSV download"}</span>
                 <div>
                   <button
                     onClick={() =>
-                      triggerDownload(lastFile.downloadUrl, lastFile.title)
+                      triggerDownload(lastFile.downloadUrl, lastFile.title || analysis?.title || "MgreSV download")
                     }
                   >
                     Download ulang

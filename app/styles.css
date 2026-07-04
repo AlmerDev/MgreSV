@@ -422,6 +422,21 @@ button:disabled {
   border-radius: 18px;
   background: rgba(236, 72, 153, 0.08);
 }
+
+.lastFileThumb {
+  width: 100%;
+  margin-bottom: 10px;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(236, 72, 153, 0.15);
+  background: rgba(255, 255, 255, 0.72);
+}
+.lastFileThumb img {
+  display: block;
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+}
 .lastFile b {
   display: block;
   color: #9d174d;
