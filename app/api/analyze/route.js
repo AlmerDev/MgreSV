@@ -1554,6 +1554,13 @@ function detectPlatform(value) {
 function detectDirectMedia(value) {
   const full = String(value || "").toLowerCase()
   const clean = full.split("?")[0]
+
+  // Jangan anggap URL halaman post social sebagai direct file.
+  // Contoh: https://www.tiktok.com/@user/video/123...
+  // Path seperti /video/ memang ada di halaman post TikTok, tapi itu bukan
+  // direct media file. Kalau ini dianggap direct video, route akan terblokir
+  // dan muncul pesan "Direct file sudah dimatikan..." padahal link-nya valid.
+  if (isSocialPostPageUrl(value)) return null
   if (clean.match(/\.(mp4|webm|mkv|mov|avi|m4v|3gp|flv)$/) || /mime_type=video|video_mp4|playaddr|downloadaddr|video_versions|video_url|dash_url|\/video\//.test(full) || (/pinimg/.test(full) && /video|videos|\.mp4|\.m3u8/.test(full)) || (/(cdninstagram|fbcdn|fbsbx|scontent|twimg)/.test(full) && /video|\.mp4|\/v\//.test(full))) return "video"
   if (clean.match(/\.(mp3|m4a|wav|aac|flac|ogg|opus)$/) || /mime_type=audio|audio_mpeg|audio_mp4/.test(full)) return "audio"
   if (clean.match(/\.(jpg|jpeg|png|webp|gif|bmp|tiff|avif)$/) || /mime_type=image|image_jpeg|image_webp/.test(full) || (/pinimg/.test(full) && !/video|videos|\.mp4|\.m3u8/.test(full))) return "photo"
