@@ -120,6 +120,56 @@ const RESULT_TABS = [
   },
 ];
 
+
+
+const DEFAULT_SUPPORTED_ROWS = {
+  audio: new Set([
+    "320k|mp3",
+    "256k|m4a",
+    "192k|mp3",
+    "160k|aac",
+    "128k|mp3",
+    "best|wav",
+    "best|ogg",
+    "96k|opus",
+  ]),
+  video: new Set([
+    "1080p|mp4",
+    "720p|mp4",
+    "480p|mp4",
+    "360p|mp4",
+  ]),
+  photo: new Set([
+    "original|jpg",
+    "original|png",
+    "original|webp",
+    "large|jpeg",
+  ]),
+};
+
+function rowKey(row) {
+  return `${row.quality}|${row.fileType}`;
+}
+
+function getSupportedRows(tab, analysis) {
+  const rows = Array.isArray(tab?.rows) ? tab.rows : [];
+
+  return rows.filter((row) => {
+    const mediaGroup = row.mediaGroup || tab.id;
+    const serverRows = analysis?.supportedFormats?.[mediaGroup];
+
+    if (Array.isArray(serverRows) && serverRows.length) {
+      return serverRows.some(
+        (item) =>
+          item?.quality === row.quality && item?.fileType === row.fileType,
+      );
+    }
+
+    const supported = DEFAULT_SUPPORTED_ROWS[mediaGroup];
+    return supported ? supported.has(rowKey(row)) : false;
+  });
+}
+
 function normalizeSlidesForUi(slides, platform) {
   const list = Array.isArray(slides) ? slides : [];
   const output = [];
@@ -265,7 +315,9 @@ export default function Home() {
       ? rawAllowedTabs.filter((tab) => tab !== "photo")
       : rawAllowedTabs;
 
-    return RESULT_TABS.filter((tab) => allowedTabs.includes(tab.id));
+    return RESULT_TABS.filter(
+      (tab) => allowedTabs.includes(tab.id) && getSupportedRows(tab, analysis).length,
+    );
   }, [analysis, isVideoMode]);
 
   const activeTabData = useMemo(() => {
@@ -275,6 +327,10 @@ export default function Home() {
       RESULT_TABS[1]
     );
   }, [activeTab, availableTabs]);
+
+  const activeRows = useMemo(() => {
+    return getSupportedRows(activeTabData, analysis);
+  }, [activeTabData, analysis]);
 
   const slides = useMemo(() => {
     if (isVideoMode) return [];
@@ -326,7 +382,10 @@ export default function Home() {
           Array.isArray(data.allowedTabs) && data.allowedTabs.length
             ? data.allowedTabs
             : [];
-        const preferredTab = allowedTabs[0] || data.suggestedGroup || "video";
+        const supportedTabs = RESULT_TABS.filter(
+          (tab) => allowedTabs.includes(tab.id) && getSupportedRows(tab, data).length,
+        ).map((tab) => tab.id);
+        const preferredTab = supportedTabs[0] || allowedTabs[0] || data.suggestedGroup || "video";
 
         const dataIsVideo =
           data.linkKind === "video" ||
@@ -336,7 +395,7 @@ export default function Home() {
 
         if (dataIsVideo) {
           setActiveTab("video");
-        } else if (allowedTabs.includes(data.suggestedGroup)) {
+        } else if (supportedTabs.includes(data.suggestedGroup)) {
           setActiveTab(data.suggestedGroup);
         } else {
           setActiveTab(preferredTab);
@@ -375,7 +434,7 @@ export default function Home() {
       if (!res.ok || !data.ok) {
         setError(data.error || "Download slide gagal.");
       } else {
-        setLastFile({ ...data, title: data.title || analysis?.title || "MgreSV download", thumbnail: data.thumbnail || primaryThumbnail || "" });
+        setLastFile(data);
         await triggerDownload(
           data.downloadUrl,
           data.title || `slide-${index + 1}`,
@@ -421,7 +480,7 @@ export default function Home() {
       if (!res.ok || !data.ok) {
         setError(data.error || "Download semua slide gagal.");
       } else {
-        setLastFile({ ...data, title: data.title || analysis?.title || "MgreSV download", thumbnail: data.thumbnail || primaryThumbnail || "" });
+        setLastFile(data);
         await triggerDownload(
           data.downloadUrl,
           data.title || `${analysis?.platform || "slides"}-slides.zip`,
@@ -469,7 +528,7 @@ export default function Home() {
       if (!res.ok || !data.ok) {
         setError(data.error || "Download gagal.");
       } else {
-        setLastFile({ ...data, title: data.title || analysis?.title || "MgreSV download", thumbnail: data.thumbnail || primaryThumbnail || "" });
+        setLastFile(data);
         await triggerDownload(
           data.downloadUrl,
           data.title || `menginasv.${row.fileType}`,
@@ -690,17 +749,12 @@ export default function Home() {
 
             {lastFile ? (
               <div className="lastFile">
-                {lastFile.thumbnail ? (
-                  <div className="lastFileThumb">
-                    <img src={previewImageUrl(lastFile.thumbnail || primaryThumbnail, analysis?.source || url)} alt={lastFile.title || analysis?.title || "Preview file"} />
-                  </div>
-                ) : null}
                 <b>File siap.</b>
-                <span>{lastFile.title || analysis?.title || "MgreSV download"}</span>
+                <span>{lastFile.title}</span>
                 <div>
                   <button
                     onClick={() =>
-                      triggerDownload(lastFile.downloadUrl, lastFile.title || analysis?.title || "MgreSV download")
+                      triggerDownload(lastFile.downloadUrl, lastFile.title)
                     }
                   >
                     Download ulang
@@ -807,7 +861,17 @@ export default function Home() {
                   <span>Format</span>
                   <span>Action</span>
                 </div>
-                {activeTabData.rows.map((row) => {
+                {!activeRows.length ? (
+                  <div className="tr emptyFormatRow">
+                    <div>
+                      <b>Format belum tersedia</b>
+                      <em>Pilih link lain yang didukung.</em>
+                    </div>
+                    <span>-</span>
+                    <span>-</span>
+                  </div>
+                ) : null}
+                {activeRows.map((row) => {
                   const mediaGroup = row.mediaGroup || activeTab;
                   const key = `${mediaGroup}-${row.quality}-${row.fileType}`;
                   const isLoading = downloadingKey === key;

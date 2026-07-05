@@ -111,11 +111,12 @@ export async function POST(req) {
     return NextResponse.json({ ok: false, error: "Link tidak valid." }, { status: 400 })
   }
 
-  const platform = selectedPlatform === "auto" ? detectPlatform(url) : selectedPlatform
+  const detectedPlatform = detectPlatform(url)
+  const platform = selectedPlatform === "auto" ? detectedPlatform : selectedPlatform
   const directType = detectDirectMedia(url)
   const knownPhotoPost = isKnownPhotoPostUrl(url)
   const forceUrlVideoMode = isKnownVideoPostUrl(url, platform)
-  const blockReason = getConvertBlockReason(url, platform, directType)
+  const blockReason = getConvertBlockReason(url, platform, directType, detectedPlatform, selectedPlatform)
 
   if (blockReason) {
     return NextResponse.json({
@@ -290,6 +291,8 @@ export async function POST(req) {
       ? `Terdeteksi ${slides.length} media/slide. Kamu bisa download per slide atau download semua slide sekaligus.`
       : profile.note
 
+  const supportedFormats = buildSupportedFormats(allowedTabs)
+
   return NextResponse.json({
     ok: true,
     title,
@@ -303,7 +306,8 @@ export async function POST(req) {
     thumbnail,
     slides,
     suggestedGroup,
-    note
+    note,
+    supportedFormats
   }, {
     headers: { "cache-control": "no-store" }
   })
@@ -1613,13 +1617,61 @@ function isAppleMusicUrl(value) {
   }
 }
 
-function getConvertBlockReason(value, platform, directType) {
+function buildSupportedFormats(allowedTabs) {
+  const tabs = new Set(Array.isArray(allowedTabs) ? allowedTabs : [])
+  const formats = {}
+
+  if (tabs.has("audio")) {
+    formats.audio = [
+      { quality: "320k", fileType: "mp3", format: "MP3 High" },
+      { quality: "256k", fileType: "m4a", format: "M4A" },
+      { quality: "192k", fileType: "mp3", format: "MP3" },
+      { quality: "160k", fileType: "aac", format: "AAC" },
+      { quality: "128k", fileType: "mp3", format: "MP3 Small" },
+      { quality: "best", fileType: "wav", format: "WAV" },
+      { quality: "best", fileType: "ogg", format: "OGG" },
+      { quality: "96k", fileType: "opus", format: "OPUS" }
+    ]
+  }
+
+  if (tabs.has("video")) {
+    formats.video = [
+      { quality: "1080p", fileType: "mp4", format: "Full HD" },
+      { quality: "720p", fileType: "mp4", format: "HD" },
+      { quality: "480p", fileType: "mp4", format: "SD" },
+      { quality: "360p", fileType: "mp4", format: "Small" }
+    ]
+  }
+
+  if (tabs.has("photo")) {
+    formats.photo = [
+      { quality: "original", fileType: "jpg", format: "JPG" },
+      { quality: "original", fileType: "png", format: "PNG" },
+      { quality: "original", fileType: "webp", format: "WEBP" },
+      { quality: "large", fileType: "jpeg", format: "JPEG" }
+    ]
+  }
+
+  return formats
+}
+
+function getConvertBlockReason(value, platform, directType, detectedPlatform = platform, selectedPlatform = "auto") {
   if (["unsupported", "reddit", "soundcloud", "vimeo"].includes(platform)) {
     return "Platform ini sudah dimatikan dari MgreSV. Pakai YouTube, TikTok, Instagram, Facebook, X/Twitter, Threads, atau Pinterest."
   }
 
   if (directType) {
     return "Direct file sudah dimatikan dari MgreSV. Pakai link post/platform yang didukung."
+  }
+
+  if (detectedPlatform === "direct") {
+    return selectedPlatform === "auto"
+      ? "Link atau platform ini belum didukung untuk download di MgreSV. Gunakan link YouTube, TikTok, Instagram, Facebook, X/Twitter, Threads, atau Pinterest."
+      : "Link tidak sesuai dengan platform yang dipilih atau belum didukung. Pilih Auto atau gunakan link dari platform yang benar."
+  }
+
+  if (selectedPlatform !== "auto" && detectedPlatform !== selectedPlatform && detectedPlatform !== "direct") {
+    return "Link tidak sesuai dengan platform yang dipilih. Pilih Auto atau pilih platform yang sesuai dengan link."
   }
 
   if (isTikTokMusicUrl(value)) {
