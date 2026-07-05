@@ -553,31 +553,31 @@ export default function Home() {
     return url;
   }
 
-  async function triggerDownload(downloadUrl, filename) {
-    try {
-      if (!downloadUrl) throw new Error("Download URL kosong.");
-      const response = await fetch(downloadUrl, {
-        method: "GET",
-        cache: "no-store",
-      });
-      if (!response.ok)
-        throw new Error("File tidak bisa diambil dari worker/provider.");
+  function triggerDownload(downloadUrl, filename) {
+    if (!downloadUrl) {
+      setError("Download URL kosong. Silakan convert ulang.");
+      return;
+    }
 
-      const blob = await response.blob();
-      const blobUrl = window.URL.createObjectURL(blob);
+    try {
       const a = document.createElement("a");
-      a.href = blobUrl;
-      a.download = filename || "menginasv-download";
-      a.rel = "noopener";
+      a.href = downloadUrl;
+      a.download = sanitizeDownloadFilename(filename || "menginasv-download");
+      a.rel = "noopener noreferrer";
+      a.style.display = "none";
       document.body.appendChild(a);
       a.click();
       a.remove();
-      window.setTimeout(() => window.URL.revokeObjectURL(blobUrl), 1000);
     } catch {
-      setError(
-        "File sudah diproses, tapi browser gagal auto-download. Klik Download ulang atau Buka file.",
-      );
+      window.location.href = downloadUrl;
     }
+  }
+
+  function sanitizeDownloadFilename(value) {
+    return String(value || "menginasv-download")
+      .replace(/[\\/:*?"<>|]+/g, "-")
+      .replace(/\s+/g, " ")
+      .trim() || "menginasv-download";
   }
 
   function resetConvert() {
@@ -761,10 +761,10 @@ export default function Home() {
                   </button>
                   <a
                     href={lastFile.downloadUrl}
-                    target="_blank"
+                    download={sanitizeDownloadFilename(lastFile.title || "menginasv-download")}
                     rel="noopener noreferrer"
                   >
-                    Buka file
+                    Download manual
                   </a>
                 </div>
               </div>
