@@ -34,8 +34,11 @@ const features = [
 ];
 
 export const metadata = {
-  title: "Tentang Website - MgreSV",
+  title: "Tentang Website",
   description: "Tentang MgreSV dan fitur unggulan website downloader.",
+  alternates: {
+    canonical: "/tentang",
+  },
 };
 
 export default function TentangPage() {

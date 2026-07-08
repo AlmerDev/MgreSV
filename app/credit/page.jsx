@@ -35,8 +35,11 @@ const creators = [
 ];
 
 export const metadata = {
-  title: "Credit - MgreSV",
+  title: "Credit",
   description: "Pembuat website MgreSV.",
+  alternates: {
+    canonical: "/credit",
+  },
 };
 
 export default function CreditPage() {
