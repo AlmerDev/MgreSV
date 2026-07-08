@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /files/
+Disallow: /tmp/
+
+Sitemap: https://mgre-sv.vercel.app/sitemap.xml
+Host: https://mgre-sv.vercel.app
