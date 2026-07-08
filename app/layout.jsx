@@ -1,4 +1,5 @@
 import "./styles.css";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://mgresv.vercel.app").replace(/\/$/, "");
 const SITE_NAME = "MgreSV";
@@ -142,6 +143,7 @@ export default function RootLayout({ children }) {
     <html lang="id">
       <body>
         {children}
+        <SpeedInsights />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }}
