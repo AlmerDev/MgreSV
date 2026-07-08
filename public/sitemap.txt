@@ -1,4 +1,10 @@
 https://mgre-sv.vercel.app/
+https://mgre-sv.vercel.app/youtube-downloader
+https://mgre-sv.vercel.app/tiktok-downloader
+https://mgre-sv.vercel.app/instagram-downloader
+https://mgre-sv.vercel.app/facebook-downloader
+https://mgre-sv.vercel.app/download-video
+https://mgre-sv.vercel.app/download-mp3
 https://mgre-sv.vercel.app/tentang
 https://mgre-sv.vercel.app/review
 https://mgre-sv.vercel.app/leaderboard

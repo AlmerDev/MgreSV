@@ -3480,3 +3480,161 @@ body.navMenuOpen {
     justify-self: start;
   }
 }
+
+/* ===== SEO landing pages and internal links ===== */
+.seoInternalLinks,
+.seoPage {
+  width: min(1120px, calc(100% - 32px));
+  margin: 42px auto 0;
+}
+
+.seoInternalLinks {
+  border: 1px solid rgba(236, 72, 153, 0.14);
+  border-radius: 28px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+}
+
+.seoInternalLinks p,
+.seoEyebrow {
+  margin: 0 0 8px;
+  color: #db2777;
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.seoInternalLinks h2 {
+  margin: 0 0 16px;
+  color: #0f172a;
+  font-size: clamp(22px, 3vw, 34px);
+  letter-spacing: -0.04em;
+}
+
+.seoInternalLinks div,
+.seoLinks div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.seoInternalLinks a,
+.seoLinks a,
+.seoBack,
+.seoCta {
+  text-decoration: none;
+  font-weight: 950;
+}
+
+.seoInternalLinks a,
+.seoLinks a {
+  border: 1px solid rgba(236, 72, 153, 0.18);
+  border-radius: 999px;
+  padding: 10px 14px;
+  color: #be185d;
+  background: rgba(236, 72, 153, 0.07);
+}
+
+.seoPage {
+  padding: 36px 0 60px;
+}
+
+.seoHero,
+.seoCard {
+  border: 1px solid rgba(236, 72, 153, 0.14);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+}
+
+.seoHero {
+  padding: clamp(28px, 5vw, 56px);
+}
+
+.seoBack {
+  display: inline-flex;
+  margin-bottom: 24px;
+  color: #be185d;
+}
+
+.seoHero h1 {
+  max-width: 760px;
+  margin: 0;
+  color: #0f172a;
+  font-size: clamp(34px, 7vw, 72px);
+  line-height: 0.95;
+  letter-spacing: -0.07em;
+}
+
+.seoHero p:not(.seoEyebrow) {
+  max-width: 720px;
+  margin: 18px 0 0;
+  color: #475569;
+  font-size: 18px;
+  line-height: 1.7;
+  font-weight: 700;
+}
+
+.seoCta {
+  display: inline-flex;
+  margin-top: 24px;
+  border-radius: 999px;
+  padding: 13px 18px;
+  color: #fff;
+  background: linear-gradient(135deg, #ec4899, #db2777);
+}
+
+.seoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.seoCard {
+  padding: 24px;
+}
+
+.seoCard h2 {
+  margin: 0 0 14px;
+  color: #0f172a;
+  font-size: 24px;
+  letter-spacing: -0.04em;
+}
+
+.seoCard h3 {
+  margin: 18px 0 6px;
+  color: #0f172a;
+  font-size: 17px;
+}
+
+.seoCard p,
+.seoCard li {
+  color: #475569;
+  line-height: 1.7;
+  font-weight: 700;
+}
+
+.seoCard ul,
+.seoCard ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.seoFaq,
+.seoLinks {
+  margin-top: 18px;
+}
+
+@media (max-width: 760px) {
+  .seoGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .seoInternalLinks,
+  .seoPage {
+    width: min(100% - 24px, 1120px);
+  }
+}

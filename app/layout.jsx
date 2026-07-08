@@ -1,33 +1,64 @@
 import "./styles.css";
 
 const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://mgre-sv.vercel.app").replace(/\/$/, "");
+const SITE_NAME = "MgreSV";
+const SITE_DESCRIPTION =
+  "MgreSV adalah tool online untuk download video, audio, foto, dan slide dari YouTube, TikTok, Instagram, Facebook, X, Threads, Pinterest, dan platform publik lainnya.";
 
 const siteJsonLd = {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
-  name: "MgreSV",
-  alternateName: "MgreSV Fast Media Downloader",
-  url: SITE_URL,
-  description:
-    "Tool online untuk download dan convert video, audio, foto, dan slide dari berbagai platform publik langsung dari browser.",
-  applicationCategory: "MultimediaApplication",
-  operatingSystem: "Web",
-  inLanguage: "id-ID",
-  offers: {
-    "@type": "Offer",
-    price: "0",
-    priceCurrency: "IDR",
-  },
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      name: SITE_NAME,
+      alternateName: ["MgreSV Downloader", "MgreSV Media Downloader", "MGRE SV"],
+      url: `${SITE_URL}/`,
+      inLanguage: "id-ID",
+      publisher: {
+        "@id": `${SITE_URL}/#organization`,
+      },
+      potentialAction: {
+        "@type": "SearchAction",
+        target: `${SITE_URL}/?url={search_term_string}`,
+        "query-input": "required name=search_term_string",
+      },
+    },
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: SITE_NAME,
+      url: `${SITE_URL}/`,
+      logo: `${SITE_URL}/logo.png`,
+    },
+    {
+      "@type": "WebApplication",
+      "@id": `${SITE_URL}/#webapp`,
+      name: SITE_NAME,
+      alternateName: "MgreSV Fast Media Downloader",
+      url: `${SITE_URL}/`,
+      description:
+        "Tool online untuk download dan convert video, audio, foto, dan slide dari berbagai platform publik langsung dari browser.",
+      applicationCategory: "MultimediaApplication",
+      operatingSystem: "Web",
+      inLanguage: "id-ID",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "IDR",
+      },
+    },
+  ],
 };
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
+  applicationName: SITE_NAME,
   title: {
     default: "MgreSV | Download Video, Audio & Foto Online",
     template: "%s | MgreSV",
   },
-  description:
-    "MgreSV adalah tool online untuk download video, audio, foto, dan slide dari YouTube, TikTok, Instagram, Facebook, X, Threads, Pinterest, dan platform publik lainnya.",
+  description: SITE_DESCRIPTION,
   keywords: [
     "MgreSV",
     "mgresv",
@@ -47,8 +78,9 @@ export const metadata = {
   ],
   authors: [{ name: "AlmerDev" }, { name: "Ciyan" }],
   creator: "AlmerDev",
-  publisher: "MgreSV",
+  publisher: SITE_NAME,
   category: "technology",
+  manifest: "/site.webmanifest",
   alternates: {
     canonical: "/",
   },
@@ -65,24 +97,27 @@ export const metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/logo.png", sizes: "512x512", type: "image/png" },
-    ],
-    apple: "/logo.png",
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/logo.png", sizes: "728x728", type: "image/png" },
+      { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      ],
+    shortcut: "/favicon.ico",
+    apple: [{ url: "/logo.png", sizes: "728x728", type: "image/png" }],
   },
   openGraph: {
     title: "MgreSV | Download Video, Audio & Foto Online",
     description:
       "Fast media downloader untuk video, audio, foto, dan slide dari berbagai platform publik.",
-    url: SITE_URL,
-    siteName: "MgreSV",
+    url: `${SITE_URL}/`,
+    siteName: SITE_NAME,
     type: "website",
     locale: "id_ID",
     images: [
       {
         url: "/logo.png",
-        width: 512,
-        height: 512,
+        width: 728,
+        height: 728,
         alt: "MgreSV Fast Media Downloader",
       },
     ],

@@ -905,6 +905,19 @@ export default function Home() {
         </section>
       )}
 
+      <section className="seoInternalLinks" aria-labelledby="seo-links-title">
+        <p>Download cepat untuk platform populer</p>
+        <h2 id="seo-links-title">Pilih downloader sesuai kebutuhan</h2>
+        <div>
+          <a href="/youtube-downloader">YouTube Downloader</a>
+          <a href="/tiktok-downloader">TikTok Downloader</a>
+          <a href="/instagram-downloader">Instagram Downloader</a>
+          <a href="/facebook-downloader">Facebook Downloader</a>
+          <a href="/download-video">Download Video Online</a>
+          <a href="/download-mp3">Download MP3 Online</a>
+        </div>
+      </section>
+
       <footer className="footerNote">
         Harap gunakan dengan bijak. Hargai hak cipta kreator.
       </footer>
