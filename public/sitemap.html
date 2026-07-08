@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sitemap MgreSV</title>
+  <meta name="description" content="Daftar halaman publik MgreSV untuk membantu pengunjung dan mesin pencari menemukan halaman penting." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://mgre-sv.vercel.app/sitemap.html" />
+  <link rel="sitemap" type="application/xml" href="https://mgre-sv.vercel.app/sitemap.xml" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f172a;
+      --card: rgba(15, 23, 42, 0.78);
+      --line: rgba(148, 163, 184, 0.22);
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 32rem),
+        radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.16), transparent 32rem),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    main {
+      width: min(920px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 56px 0;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: var(--card);
+      box-shadow: 0 24px 80px rgba(2, 6, 23, 0.42);
+      overflow: hidden;
+    }
+
+    header {
+      padding: 32px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+    }
+
+    a {
+      display: block;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      color: var(--text);
+      text-decoration: none;
+      background: rgba(15, 23, 42, 0.6);
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    a:hover,
+    a:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(56, 189, 248, 0.6);
+      background: rgba(14, 165, 233, 0.12);
+      outline: none;
+    }
+
+    a strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1rem;
+    }
+
+    a span {
+      color: var(--muted);
+      font-size: 0.92rem;
+      overflow-wrap: anywhere;
+    }
+
+    footer {
+      padding: 20px 32px 30px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="card" aria-labelledby="sitemap-title">
+      <header>
+        <h1 id="sitemap-title">Sitemap MgreSV</h1>
+        <p>Daftar halaman publik MgreSV yang bisa dikunjungi pengunjung dan crawler mesin pencari.</p>
+      </header>
+
+      <ul>
+        <li>
+          <a href="https://mgre-sv.vercel.app/">
+            <strong>Homepage / Download</strong>
+            <span>https://mgre-sv.vercel.app/</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://mgre-sv.vercel.app/tentang">
+            <strong>Tentang Website</strong>
+            <span>https://mgre-sv.vercel.app/tentang</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://mgre-sv.vercel.app/review">
+            <strong>Review</strong>
+            <span>https://mgre-sv.vercel.app/review</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://mgre-sv.vercel.app/leaderboard">
+            <strong>Leaderboard</strong>
+            <span>https://mgre-sv.vercel.app/leaderboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://mgre-sv.vercel.app/credit">
+            <strong>Credit</strong>
+            <span>https://mgre-sv.vercel.app/credit</span>
+          </a>
+        </li>
+      </ul>
+
+      <footer>
+        Terakhir diperbarui: 8 Juli 2026. XML sitemap tetap tersedia di /sitemap.xml.
+      </footer>
+    </section>
+  </main>
+</body>
+</html>

@@ -4,5 +4,5 @@ Disallow: /api/
 Disallow: /files/
 Disallow: /tmp/
 
+Sitemap: https://mgre-sv.vercel.app/sitemap.xml
 Sitemap: https://mgre-sv.vercel.app/sitemap.txt
-Host: https://mgre-sv.vercel.app

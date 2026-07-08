@@ -1,8 +1,6 @@
 import "./styles.css";
 
-const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://mgre-sv.vercel.app"
-).replace(/\/$/, "");
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://mgre-sv.vercel.app").replace(/\/$/, "");
 
 const siteJsonLd = {
   "@context": "https://schema.org",
@@ -66,7 +64,10 @@ export const metadata = {
     },
   },
   icons: {
-    icon: [{ url: "/logo.png", sizes: "512x512", type: "image/png" }],
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/logo.png", sizes: "512x512", type: "image/png" },
+    ],
     apple: "/logo.png",
   },
   openGraph: {
