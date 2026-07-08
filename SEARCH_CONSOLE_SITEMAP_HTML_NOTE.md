@@ -11,7 +11,7 @@ Catatan penting:
 - Jangan submit `sitemap.html` di menu **Peta Situs** Google Search Console. HTML sitemap berguna sebagai halaman daftar link, tetapi laporan sitemap Google biasanya membaca XML, TXT, RSS, atau Atom.
 - Submit `sitemap.txt` jika `sitemap.xml` masih berstatus "Tidak dapat membaca peta situs".
 - Setelah deploy, cek:
-  - `https://mgre-sv.vercel.app/sitemap.html`
-  - `https://mgre-sv.vercel.app/sitemap.txt`
-  - `https://mgre-sv.vercel.app/sitemap.xml`
-  - `https://mgre-sv.vercel.app/robots.txt`
+  - `https://mgresv.vercel.app/sitemap.html`
+  - `https://mgresv.vercel.app/sitemap.txt`
+  - `https://mgresv.vercel.app/sitemap.xml`
+  - `https://mgresv.vercel.app/robots.txt`

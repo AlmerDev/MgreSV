@@ -1,6 +1,6 @@
 import "./styles.css";
 
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://mgre-sv.vercel.app").replace(/\/$/, "");
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://mgresv.vercel.app").replace(/\/$/, "");
 const SITE_NAME = "MgreSV";
 const SITE_DESCRIPTION =
   "MgreSV adalah tool online untuk download video, audio, foto, dan slide dari YouTube, TikTok, Instagram, Facebook, X, Threads, Pinterest, dan platform publik lainnya.";

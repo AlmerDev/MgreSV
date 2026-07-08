@@ -11,8 +11,8 @@ Perubahan:
 
 Setelah deploy ulang ke Vercel, buka:
 
-- https://mgre-sv.vercel.app/sitemap.xml
-- https://mgre-sv.vercel.app/robots.txt
+- https://mgresv.vercel.app/sitemap.xml
+- https://mgresv.vercel.app/robots.txt
 
 Lalu di Google Search Console:
 

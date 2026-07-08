@@ -6,14 +6,14 @@ Patch ini menyiapkan hal teknis agar website lebih mudah dicrawl dan diindeks Go
 
 - `app/layout.jsx`
   - Metadata utama diperjelas.
-  - `metadataBase` diarahkan ke `https://mgre-sv.vercel.app`.
+  - `metadataBase` diarahkan ke `https://mgresv.vercel.app`.
   - Canonical homepage ditambahkan.
   - Open Graph, Twitter card, robots meta, viewport, dan JSON-LD WebApplication ditambahkan.
 
 - `app/robots.js`
   - Robots mengizinkan crawl halaman publik.
   - API dan folder temporary diblok crawl.
-  - Sitemap diarahkan ke `https://mgre-sv.vercel.app/sitemap.xml`.
+  - Sitemap diarahkan ke `https://mgresv.vercel.app/sitemap.xml`.
 
 - `app/sitemap.js`
   - Sitemap hanya memuat URL publik yang benar-benar ada:
@@ -26,7 +26,7 @@ Patch ini menyiapkan hal teknis agar website lebih mudah dicrawl dan diindeks Go
 
 - Google verification
   - File `googleab7d0497e887ac4d.html` sudah dicopy ke `public/`, sehingga akan bisa diakses di:
-    - `https://mgre-sv.vercel.app/googleab7d0497e887ac4d.html`
+    - `https://mgresv.vercel.app/googleab7d0497e887ac4d.html`
 
 - Page metadata
   - Metadata dan canonical ditambahkan untuk halaman publik.
@@ -40,7 +40,7 @@ Patch ini menyiapkan hal teknis agar website lebih mudah dicrawl dan diindeks Go
 1. Pastikan environment variable di Vercel:
 
 ```env
-NEXT_PUBLIC_SITE_URL=https://mgre-sv.vercel.app
+NEXT_PUBLIC_SITE_URL=https://mgresv.vercel.app
 ```
 
 2. Deploy ulang project.
@@ -48,9 +48,9 @@ NEXT_PUBLIC_SITE_URL=https://mgre-sv.vercel.app
 3. Buka URL ini dan pastikan muncul:
 
 ```text
-https://mgre-sv.vercel.app/robots.txt
-https://mgre-sv.vercel.app/sitemap.xml
-https://mgre-sv.vercel.app/googleab7d0497e887ac4d.html
+https://mgresv.vercel.app/robots.txt
+https://mgresv.vercel.app/sitemap.xml
+https://mgresv.vercel.app/googleab7d0497e887ac4d.html
 ```
 
 4. Masuk ke Google Search Console.
@@ -58,7 +58,7 @@ https://mgre-sv.vercel.app/googleab7d0497e887ac4d.html
 5. Tambahkan property dengan tipe URL prefix:
 
 ```text
-https://mgre-sv.vercel.app
+https://mgresv.vercel.app
 ```
 
 6. Pilih metode verifikasi HTML file, lalu klik Verify. File verifikasi sudah berada di `public/`.
@@ -72,7 +72,7 @@ sitemap.xml
 8. Buka URL Inspection, masukkan:
 
 ```text
-https://mgre-sv.vercel.app/
+https://mgresv.vercel.app/
 ```
 
 Lalu pilih Request indexing.

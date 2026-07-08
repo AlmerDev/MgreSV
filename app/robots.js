@@ -1,4 +1,4 @@
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://mgre-sv.vercel.app").replace(/\/$/, "");
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://mgresv.vercel.app").replace(/\/$/, "");
 
 export default function robots() {
   return {
